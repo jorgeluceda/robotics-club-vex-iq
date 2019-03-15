@@ -13,12 +13,14 @@ Port 7        			distanceSensor      VEX IQ Distance		      		Distance Sensor (r
 Port 1        			leftMotor           VEX IQ Motor		      			Left side motor
 Port 6       				rightMotor          VEX IQ Motor		      			Right side motor (reversed)
 ------------------------------------------------------------------------------------------------*/
-void interpolateAcceleration(int startSpeed, int finalSpeed, float rate,  int incTime) {
+void interpolateAcceleration(int startSpeed, int finalSpeed, float rate,  int incTime)
+{
 	int range = abs(finalSpeed - startSpeed);
 
 	int increments = range / rate;
 
-	for(int i = 0; i < increments; i += rate) {
+	for(int i = 0; i < increments; i += rate)
+	{
 		setMotorSpeed(leftMotor, -i);
 		setMotorSpeed(rightMotor, -i);
 		sleep(incTime);
@@ -30,7 +32,8 @@ void interpolateDeceleration(int startSpeed, int finalSpeed, float rate,  int in
 
 	int increments = range / rate;
 
-	for(int i = range; i > finalSpeed; i -= rate) {
+	for(int i = range; i > finalSpeed; i -= rate)
+  {
 		setMotorSpeed(leftMotor, -i);
 		setMotorSpeed(rightMotor, -i);
 		sleep(incTime);
