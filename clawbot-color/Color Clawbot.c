@@ -40,6 +40,14 @@ void interpolateDeceleration(int startSpeed, int finalSpeed, float rate,  int in
 	}
 }
 
+void turnRight()
+{
+	setMotorSpeed(leftMotor, 100);
+	setMotorSpeed(rightMotor, -100);
+
+
+}
+
 task main()
 {
 	const int maxSpeed = -75;
@@ -47,6 +55,7 @@ task main()
 	while(1)
 	{
 		//If distance sensor is more than 300mm (30cm) away
+		sleep(300);
 		if(getDistanceValue(distanceSensor) > 300)
 		{
 			if(curSpeed == 0)
@@ -66,6 +75,18 @@ task main()
 			}
 			setMotorSpeed(leftMotor, 0);
 			setMotorSpeed(rightMotor, 0);
+
+			sleep(1000);
+			resetGyro(3);
+			turnRight();
+			while(getGyroDegreesFloat(3) > -90.0) {
+			}
+
+			setMotorSpeed(leftMotor, 0);
+			setMotorSpeed(rightMotor, 0);
+
+
+			sleep(1000);
 		}
 	}
 }
