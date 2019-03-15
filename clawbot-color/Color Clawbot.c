@@ -42,26 +42,6 @@ void interpolateDeceleration(int startSpeed, int finalSpeed, float rate,  int in
 
 task main()
 {
-	/*
-	int currSpeed;
-	const int maxSpeed = 75;
-	while(1) {
-		//If distance sensor is more than 300mm (30cm) away
-		if(getDistanceValue(distanceSensor) > 300) {
-				if(currSpeed == 0) {
-					interpolateAcceleration(0, maxSpeed, 1, 50);
-					currSpeed = maxSpeed;
-				}
-				setMotorSpeed(leftMotor, (maxSpeed));
-				setMotorSpeed(rightMotor, (maxSpeed));
-			} else {
-				if(currSpeed > 0) {
-					interpolateDeceleration(maxSpeed, 0, 1, 50);
-				}
-				setMotorSpeed(leftMotor, 0);
-				setMotorSpeed(rightMotor, 0);
-			}
-	}*/
 	const int maxSpeed = -75;
 	int curSpeed = 0;
 	while(1)
