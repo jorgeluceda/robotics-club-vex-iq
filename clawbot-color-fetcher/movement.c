@@ -22,9 +22,7 @@ const int ACCEL_TIME = 10; // in ms
 
 static int currSpeed = 0;
 
-float cosInterpolate(
-   float y1, float y2,
-   float mu)
+float cosInterpolate(float y1, float y2, float mu)
 {
    float mu2 = (1 - cos(mu * PI)) / 2;
    return (y1 * (1 - mu2) + y2 * mu2);
