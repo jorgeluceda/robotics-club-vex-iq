@@ -12,10 +12,10 @@ IQ Distance Sensor returns values in millimeters.
 
 ROBOT CONFIGURATION: VEX IQ Clawbot
 MOTORS & SENSORS:
-[I/O Port]          [Name]              [Type]                			[Info]
-Port 7				distanceSensor		VEX IQ Distance					Distance Sensor (returns mm)
-Port 1				rightMotor			VEX IQ Motor					Left side motor (reversed)
-Port 6				leftMotor			VEX IQ Motor					Right side motor
+[I/O Port]          [Name]              [Type]                  [Info]
+Port 7              distanceSensor      VEX IQ Distance         Distance Sensor (returns mm)
+Port 1              rightMotor          VEX IQ Motor            Left side motor (reversed)
+Port 6              leftMotor           VEX IQ Motor            Right side motor
 ------------------------------------------------------------------------------------------------*/
 #include "movement.h"
 
