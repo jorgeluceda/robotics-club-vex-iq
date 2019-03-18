@@ -27,8 +27,8 @@ static int currSpeed = 0;
 
 float cosInterpolate(float y1, float y2, float mu)
 {
-   float mu2 = (1 - cos(mu * PI)) / 2;
-   return (y1 * (1 - mu2) + y2 * mu2);
+	float mu2 = (1 - cos(mu * PI)) / 2;
+	return (y1 * (1 - mu2) + y2 * mu2);
 }
 
 // Function returns error code -1 if rate is not within the range (0.0, 1.0].
@@ -150,91 +150,4 @@ void stopMotionImmediate()
 float max (float x, float y)
 {
 	return (x > y) ? x : y;
-}
-
-task main()
-{
-	while(1)
-	{
-		sleep(SENSOR_DELAY);
-
-		float leftDist = 0.0;
-		float rightDist = 0.0;
-		float backDist = 0.0;
-		float forwardDist = getDistanceValue(distanceSensor);
-
-		// If distance sensor is more than 300mm (30cm) away.
-		if(forwardDist > 300.0)
-		{
-			if (getBumperValue(frontBumper) == 0)
-			{
-				moveForward(MAX_SPEED);
-			}
-			else
-			{
-				stopMotionImmediate();
-				sleep(ACTUATOR_DELAY);
-
-				moveBackward(MAX_SPEED / 2);
-				sleep(1000);
-				stopMotion();
-				sleep(ACTUATOR_DELAY);
-			}
-		}
-		else
-		{
-			stopMotion();
-			sleep(ACTUATOR_DELAY);
-
-			moveBackward(MAX_SPEED / 2);
-			sleep(1000);
-			stopMotion();
-			sleep(ACTUATOR_DELAY);
-
-			turnLeft(90.0);
-			leftDist = getDistanceValue(distanceSensor);
-			sleep(SENSOR_DELAY);
-
-			turnRight(180.0);
-			rightDist = getDistanceValue(distanceSensor);
-			sleep(SENSOR_DELAY);
-
-			turnRight(90.0);
-			backDist = getDistanceValue(distanceSensor);
-			sleep(SENSOR_DELAY);
-
-			turnLeft(180.0);
-			sleep(SENSOR_DELAY);
-
-			int maxDist = max(max(rightDist, backDist), leftDist);
-
-			if (maxDist > 300.0)
-			{
-				if (leftDist == maxDist)
-				{
-					turnLeft(90.0);
-					sleep(ACTUATOR_DELAY);
-					moveForward(MAX_SPEED);
-				}
-				else if (rightDist == maxDist)
-				{
-					turnRight(90.0);
-					sleep(ACTUATOR_DELAY);
-					moveForward(MAX_SPEED);
-				}
-				else
-				{
-					turnRight(180.0);
-					sleep(ACTUATOR_DELAY);
-					moveForward(MAX_SPEED);
-				}
-				sleep(ACTUATOR_DELAY);
-			}
-			else
-			{
-				stopMotion();
-				sleep(ACTUATOR_DELAY);
-			}
-		}
-	}
 }
