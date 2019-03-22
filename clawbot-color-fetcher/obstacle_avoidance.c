@@ -31,26 +31,20 @@ task main()
 		float forwardDist = getDistanceValue(distanceSensor);
 
 		// If distance sensor is more than 300mm (30cm) away.
-		if(forwardDist > 300.0)
+		if(forwardDist > 300.0 && getBumperValue(frontBumper) == 0)
 		{
-			if (getBumperValue(frontBumper) == 0)
-			{
-				moveForward(MAX_SPEED);
-			}
-			else
-			{
-				stopMotionImmediate();
-				sleep(ACTUATOR_DELAY);
-
-				moveBackward(MAX_SPEED / 2);
-				sleep(1000);
-				stopMotion();
-				sleep(ACTUATOR_DELAY);
-			}
+			moveForward(MAX_SPEED);
 		}
 		else
 		{
-			stopMotion();
+			if (getBumperValue(frontBumper) == 1) 
+			{
+				stopMotionImmediate(); 
+			}
+			else
+			{
+				stopMotion();
+			}
 			sleep(ACTUATOR_DELAY);
 
 			moveBackward(MAX_SPEED / 2);
