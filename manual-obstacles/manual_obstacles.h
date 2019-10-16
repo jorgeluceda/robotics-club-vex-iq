@@ -23,6 +23,8 @@ const float ACCEL_RATE = 0.01; // range: (0.0, 1.0]
 const int ACCEL_TIME = 5; // in ms
 
 static int currSpeed = 0;
+//# of times the feetToDegrees method has been called
+static int timesCalled = 0;
 
 float cosInterpolate(float y1, float y2, float mu)
 {
@@ -154,12 +156,14 @@ void stopMotionImmediate()
 // NOTE: assumes that using 200mm "Travel" wheels in VEX Super Kit
 float feetToDegrees(float distance)
 {
-	float offSet = 0.3016;
-	return ((360.0 * (distance - 0.3016)) / 0.656168);
+	//if first time called, apply offset. If not, do not apply offset.
+	return timesCalled <= 1 ? ((360.0 * (distance - 0.3016)) / 0.656168) :
+												((360.0 * (distance)) / 0.656168);
 }
 
 void goForwardFeet(float distance)
 {
+	timesCalled++;
     //
     // reset encoders.
     //
